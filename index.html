@@ -5,8 +5,8 @@
     <title>title</title>
     <script src="jquery-1.11.1.min.js"></script>
     <script>
-    $(window).load(function(){
-    	var galleryWidth = $("div.gallery").width();
+    var maekFix = function() {
+    	var galleryWidth = $("div.gallery").width() * 0.98;
     	var images = $("div.gallery > img").get();
     	var perfectHeight = 300;
 
@@ -38,19 +38,28 @@
 		    	rowWidth += image.width();
 		    	console.log(rowWidth);
 	    	}
-	    	console.log(ratio);
+	    	var rowRatio = galleryWidth*1.0 / rowWidth;
+	    	$(row).each(function(i, e) {
+	    		var image = $(e);
+	    		image.width(image.width() * rowRatio);
+	    	});
     	}
     	$("div.gallery").empty();
     	$("div.gallery").append(newImages);
-    });
+    }
+    $(window).load(maekFix);
+    $(window).resize(maekFix);
+
   	</script>
   	<style type="text/css">
   	div.gallery {
-  		border: solid black 1px;
-  		padding: 5px;
+  		padding: 0px;
+      text-align: center;
+      line-height: 0px;
   	}
   	img {
-  		margin: 5px;
+  		margin: 0px;
+      border: 2px solid white;
   	}
   	</style>
   </head>
