@@ -3,10 +3,79 @@
   <head>
     <meta charset="utf-8">
     <title>title</title>
-    <link rel="stylesheet" href="style.css">
     <script src="jquery-1.11.1.min.js"></script>
+    <script>
+    $(window).load(function(){
+    	var galleryWidth = $("div.gallery").width();
+    	var images = $("div.gallery > img").get();
+    	var perfectHeight = 300;
+
+    	var newImages = [];
+    	while(images.length > 0) {
+	    	var row = [];
+	    	var rowWidth = 0;
+
+	    	var image = $(images.shift());
+	    	var ratio = perfectHeight*1.0 / image.height();
+	    	console.log(ratio)
+	    	image.width(image.width() * ratio);
+	    	// image.height(image.height() * ratio);
+
+	    	row.push(image);
+	    	newImages.push(image);
+	    	rowWidth += image.width();
+
+	    	while(rowWidth < galleryWidth && images.length > 0) {
+
+		    	var image = $(images.shift());
+		    	var ratio = row[row.length - 1].height()*1.0 / image.height();
+		    	console.log(ratio);
+		    	image.width(image.width() * ratio);
+		    	// image.height(image.height() * ratio);
+
+		    	row.push(image);
+		    	newImages.push(image);
+		    	rowWidth += image.width();
+		    	console.log(rowWidth);
+	    	}
+	    	console.log(ratio);
+    	}
+    	$("div.gallery").empty();
+    	$("div.gallery").append(newImages);
+    });
+  	</script>
+  	<style type="text/css">
+  	div.gallery {
+  		border: solid black 1px;
+  		padding: 5px;
+  	}
+  	img {
+  		margin: 5px;
+  	}
+  	</style>
   </head>
   <body>
-    <!-- page content -->
+  	<div class="gallery">
+  		<img src="image1.jpeg">
+  		<img src="image2.jpeg">
+  		<img src="image3.jpeg">
+  		<img src="image4.jpeg">
+  		<img src="image5.jpeg">
+  		<img src="image6.jpeg">
+  		<img src="image7.jpeg">
+  		<img src="image8.jpeg">
+  		<img src="image9.jpeg">
+  		<img src="image10.jpeg">
+  		<img src="image11.jpeg">
+  		<img src="image12.jpeg">
+  		<img src="image13.jpeg">
+  		<img src="image14.jpeg">
+  		<img src="image15.jpeg">
+  		<img src="image16.jpeg">
+  		<img src="image17.jpeg">
+  		<img src="image18.jpeg">
+		<img src="image19.jpeg">
+		<img src="image20.jpeg">
+  	</div>
   </body>
 </html>
