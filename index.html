@@ -1,13 +1,14 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang='en'>
   <head>
-    <meta charset="utf-8">
-    <title>title</title>
-    <script src="jquery-1.11.1.min.js"></script>
+    <meta charset='utf-8'>
+    <title>Folkol Photo Wall Gallery</title>
+    <script src='jquery-1.11.1.min.js'></script>
+    <link rel='stylesheet' type='text/css' href='style.css'>
     <script>
-    var maekFix = function() {
-    	var galleryWidth = $("div.gallery").width();
-    	var images = $("div.gallery > img").get();
+    var initGallery = function(gallery) {
+    	var galleryWidth = gallery.width();
+    	var images = gallery.find('img').get();
     	var perfectHeight = 300;
 
     	var newImages = [];
@@ -28,59 +29,30 @@
 	    	$(row).each(function(i, e) {
 	    		var image = $(e);
 	    		image.outerWidth(image.outerWidth() * rowRatio);
-          image.height("auto");
+          image.height('auto');
 	    	});
         var newWidth = 0;
         for(var i = 0; i < row.length; i++) {
           newWidth += row[i].width();
         }
     	}
-    	$("div.gallery").empty();
-    	$("div.gallery").append(newImages);
+    	$('div.gallery').empty().append(newImages);
     }
-    $(window).load(maekFix);
+    $(window).load(function () {
+      var gallery = $("div.gallery");
+      initGallery(gallery);
+    });
     // $(window).resize(maekFix); // TODO: Fix resize
-
   	</script>
-  	<style type="text/css">
-    body {
-      background-color: gray;
-    }
-  	div.gallery {
-      background-color: white;
-      padding: 2px;
-      line-height: 0px;
-      margin: 30px;
-      border: 1px black solid;
-  	}
-  	img {
-  		margin: 0px;
-      border: 2px solid white;
-  	}
-  	</style>
   </head>
   <body>
-  	<div class="gallery">
-  		<img src="image1.jpeg">
-  		<img src="image2.jpeg">
-  		<img src="image3.jpeg">
-  		<img src="image4.jpeg">
-  		<img src="image5.jpeg">
-  		<img src="image6.jpeg">
-  		<img src="image7.jpeg">
-  		<img src="image8.jpeg">
-  		<img src="image9.jpeg">
-  		<img src="image10.jpeg">
-  		<img src="image11.jpeg">
-  		<img src="image12.jpeg">
-  		<img src="image13.jpeg">
-  		<img src="image14.jpeg">
-  		<img src="image15.jpeg">
-  		<img src="image16.jpeg">
-  		<img src="image17.jpeg">
-  		<img src="image18.jpeg">
-		  <img src="image19.jpeg">
-		  <img src="image20.jpeg">
+  	<div class='gallery'>
+  		<img src='image1.jpeg'>
+  		<img src='image2.jpeg'>
+  		<img src='image3.jpeg'>
+  		<img src='image4.jpeg'>
+  		<img src='image5.jpeg'>
+  		<img src='image6.jpeg'>
   	</div>
   </body>
 </html>
