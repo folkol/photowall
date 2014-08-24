@@ -6,11 +6,12 @@
     <script src='jquery-1.11.1.min.js'></script>
     <link rel='stylesheet' type='text/css' href='style.css'>
     <script>
-    var initGallery = function(gallery) {
-    	var galleryWidth = gallery.width();
+    var initGallery = function(gallery, opts) {
+      var opts = opts || {
+        perfectHeight: 300 // TODO: Divisor of galleryHeight when we crop
+      };
+      var galleryWidth = gallery.width();
       gallery.width(galleryWidth); // TODO: Remove this when we can resize
-
-      var perfectHeight = 300; // TODO: Divisor of galleryHeight when we crop
 
     	var images = gallery.find('img').get();
       gallery.empty();
@@ -18,20 +19,20 @@
 	    	var row = [];
 	    	var rowWidth = 0;
 
-        do {
+        while(rowWidth < galleryWidth && images.length > 0) {
           var image = $(images.shift());
-          image.outerHeight(perfectHeight);
+          image.outerHeight(opts.perfectHeight);
 
           row.push(image);
           gallery.append(image);
           rowWidth += image.outerWidth();
-	    	} while(rowWidth < galleryWidth && images.length > 0);
+	    	};
 
 	    	var rowRatio = galleryWidth*1.0 / rowWidth;
 	    	$(row).each(function(i, e) {
 	    		var image = $(e);
 	    		image.outerWidth(image.outerWidth() * rowRatio);
-          image.outerHeight(perfectHeight * rowRatio);
+          image.outerHeight(opts.perfectHeight * rowRatio);
 	    	});
     	}
     }
