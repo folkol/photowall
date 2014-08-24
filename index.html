@@ -10,11 +10,14 @@
       var opts = opts || {
         perfectHeight: 300 // TODO: Divisor of galleryHeight when we crop
       };
+
       var galleryWidth = gallery.width();
       gallery.width(galleryWidth); // TODO: Remove this when we can resize
 
     	var images = gallery.find('img').get();
       gallery.empty();
+
+      // TODO: Resize in place instead of removing?
     	while(images.length > 0) {
 	    	var row = [];
 	    	var rowWidth = 0;
@@ -40,7 +43,7 @@
       var gallery = $("div.gallery");
       initGallery(gallery);
     });
-    // $(window).resize(maekFix); // TODO: Fix resize
+    // $(window).resize(initGallery($("div.gallery"))); // TODO: Fix resize
   	</script>
   </head>
   <body>
