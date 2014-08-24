@@ -15,21 +15,15 @@
 	    	var row = [];
 	    	var rowWidth = 0;
 
-	    	var image = $(images.shift());
-	    	image.outerHeight(perfectHeight);
+        do {
+          var image = $(images.shift());
+          image.outerHeight(perfectHeight);
 
-	    	row.push(image);
-	    	newImages.push(image);
-	    	rowWidth += image.outerWidth();
+          row.push(image);
+          newImages.push(image);
+          rowWidth += image.outerWidth();
+	    	} while(rowWidth < galleryWidth && images.length > 0);
 
-	    	while(rowWidth < galleryWidth && images.length > 0) {
-		    	var image = $(images.shift());
-		    	image.outerHeight(perfectHeight);
-
-		    	row.push(image);
-		    	newImages.push(image);
-		    	rowWidth += image.outerWidth();
-	    	}
 	    	var rowRatio = galleryWidth*1.0 / rowWidth;
 	    	$(row).each(function(i, e) {
 	    		var image = $(e);
@@ -56,7 +50,7 @@
       background-color: white;
       padding: 2px;
       line-height: 0px;
-      margin: 100px;
+      margin: 30px;
       border: 1px black solid;
   	}
   	img {
