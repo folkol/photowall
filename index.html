@@ -6,7 +6,7 @@
     <script src="jquery-1.11.1.min.js"></script>
     <script>
     var maekFix = function() {
-    	var galleryWidth = $("div.gallery").width() * 0.98;
+    	var galleryWidth = $("div.gallery").width();
     	var images = $("div.gallery > img").get();
     	var perfectHeight = 300;
 
@@ -16,8 +16,7 @@
 	    	var rowWidth = 0;
 
 	    	var image = $(images.shift());
-	    	var ratio = perfectHeight*1.0 / image.outerHeight();
-	    	image.outerWidth(image.outerWidth() * ratio);
+	    	image.outerHeight(perfectHeight);
 
 	    	row.push(image);
 	    	newImages.push(image);
@@ -25,8 +24,7 @@
 
 	    	while(rowWidth < galleryWidth && images.length > 0) {
 		    	var image = $(images.shift());
-		    	var ratio = row[row.length - 1].outerHeight()*1.0 / image.outerHeight();
-		    	image.outerWidth(image.outerWidth() * ratio);
+		    	image.outerHeight(perfectHeight);
 
 		    	row.push(image);
 		    	newImages.push(image);
@@ -36,6 +34,7 @@
 	    	$(row).each(function(i, e) {
 	    		var image = $(e);
 	    		image.outerWidth(image.outerWidth() * rowRatio);
+          image.height("auto");
 	    	});
         var newWidth = 0;
         for(var i = 0; i < row.length; i++) {
@@ -54,14 +53,14 @@
   	div.gallery {
       text-align: justify;
       background-color: gray;
-      padding: 2px;
+      padding: 10px;
       line-height: 0px;
       margin: 10px;
   	}
   	img {
-      /*display: inline-block;*/
-  		margin: 2px;
-      border: 2px solid white;
+      display: inline-block;
+  		margin: 0px;
+      border: 1px solid white;
   	}
   	</style>
   </head>
