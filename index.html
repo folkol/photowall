@@ -40,16 +40,18 @@
         for(var i = 0; i < row.length; i++) {
           newWidth += row[i].width();
         }
-        console.log(newWidth + ' ' + galleryWidth);
     	}
     	$("div.gallery").empty();
     	$("div.gallery").append(newImages);
     }
     $(window).load(maekFix);
-    $(window).resize(maekFix);
+    // $(window).resize(maekFix);
 
   	</script>
   	<style type="text/css">
+    body {
+      background-color: gray;
+    }
   	div.gallery {
       text-align: justify;
       background-color: white;
