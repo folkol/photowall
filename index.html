@@ -8,10 +8,12 @@
     <script>
     var initGallery = function(gallery) {
     	var galleryWidth = gallery.width();
-    	var images = gallery.find('img').get();
-    	var perfectHeight = 300;
+      gallery.width(galleryWidth); // TODO: Remove this when we can resize
 
-    	var newImages = [];
+      var perfectHeight = 300; // TODO: Divisor of galleryHeight when we crop
+
+    	var images = gallery.find('img').get();
+      gallery.empty();
     	while(images.length > 0) {
 	    	var row = [];
 	    	var rowWidth = 0;
@@ -21,7 +23,7 @@
           image.outerHeight(perfectHeight);
 
           row.push(image);
-          newImages.push(image);
+          gallery.append(image);
           rowWidth += image.outerWidth();
 	    	} while(rowWidth < galleryWidth && images.length > 0);
 
@@ -29,14 +31,9 @@
 	    	$(row).each(function(i, e) {
 	    		var image = $(e);
 	    		image.outerWidth(image.outerWidth() * rowRatio);
-          image.height('auto');
+          image.outerHeight(perfectHeight * rowRatio);
 	    	});
-        var newWidth = 0;
-        for(var i = 0; i < row.length; i++) {
-          newWidth += row[i].width();
-        }
     	}
-    	$('div.gallery').empty().append(newImages);
     }
     $(window).load(function () {
       var gallery = $("div.gallery");
